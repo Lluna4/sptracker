@@ -197,7 +197,7 @@ ptracker_lib/stdlib64/CreateFileHook.dll""".split("\n")
     os.environ['PYTHONPATH'] = r"..\system;..\..\system"
     subprocess.run(["env\windows\Scripts\pyinstaller.exe",
                     # "--debug=bootloader",
-                    "--windowed",
+                    "--windowed","--target-architecture", "arm64",
                     "--name", "ptracker", "--clean", "-y", "--onefile", 
                     "--paths", f"{ac_install_dir}\\apps\python\system",
                     "--path", "stracker", "--path", "stracker/externals",
@@ -322,6 +322,7 @@ if build_stracker_windows or build_stracker_linux or build_stracker_packager:
     if build_stracker_windows:
         print("------------------- Building stracker.exe -------------------------------")
         subprocess.run(["../env/windows/Scripts/pyinstaller.exe", "--name", "stracker",
+                        "--target-architecture", "arm64"
                         "--clean", "-y", "--onefile", "--exclude-module", "http_templates",
                         "--hidden-import", "cherrypy.wsgiserver.wsgiserver3",
                         "--hidden-import", "psycopg2", "--path", "..", "--path", "externals",
